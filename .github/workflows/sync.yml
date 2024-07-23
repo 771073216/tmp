@@ -17,12 +17,6 @@ jobs:
       - name: Checkout out project files
         uses: actions/checkout@v4
 
-      - name: Setup Go
-        uses: actions/setup-go@v5
-        with:
-          go-version: 'stable'
-          cache: false
-
       - name: Build geosite
         run: |
           cn_url="https://raw.githubusercontent.com/Loyalsoldier/v2ray-rules-dat/release/direct-list.txt"
@@ -49,10 +43,6 @@ jobs:
           mkdir ip_data
           curl -sSL https://raw.githubusercontent.com/gaoyifan/china-operator-ip/ip-lists/china.txt > ip_data/cn.txt
           ./tools/geofile_maker -sha256sum -mode geoip -datapath ip_data
-          
-      - name: Convert geo
-        run: |
-          ./tools/geo_convert -site ./publish/geosite.dat -ip ./publish/geoip.dat
 
       - name: Git push assets to "release" branch
         run: |
