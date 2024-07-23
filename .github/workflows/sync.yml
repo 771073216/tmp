@@ -49,10 +49,6 @@ jobs:
           mkdir ip_data
           curl -sSL https://raw.githubusercontent.com/gaoyifan/china-operator-ip/ip-lists/china.txt > ip_data/cn.txt
           ./tools/geofile_maker -sha256sum -mode geoip -datapath ip_data
-          
-      - name: Convert geo
-        run: |
-          ./tools/geo_convert -site ./publish/geosite.dat -ip ./publish/geoip.dat
 
       - name: Git push assets to "release" branch
         run: |
